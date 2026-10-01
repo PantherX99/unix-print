@@ -22,7 +22,7 @@ export default async function getPrinters(): Promise<Printer[]> {
   } catch (error) {
     if (
       error?.code === 1 &&
-      error?.stderr?.includes("No destinations added")
+      error?.message?.includes("No destinations added")
     ) {
       return [];
     }
