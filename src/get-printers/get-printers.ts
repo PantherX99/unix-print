@@ -20,6 +20,12 @@ export default async function getPrinters(): Promise<Printer[]> {
         connection: parsePrinterAttribute(line, "Connection"),
       }));
   } catch (error) {
+    if (
+      error?.code === 1 &&
+      error?.stderr?.includes("No destinations added")
+    ) {
+      return [];
+    }
     throw error;
   }
 }
