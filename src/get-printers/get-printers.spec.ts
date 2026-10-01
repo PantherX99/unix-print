@@ -58,9 +58,11 @@ it("return a list of available printers", async () => {
 });
 
 it("return an empty list when there are no printers installed.", async () => {
-  const error = Object.assign(new Error("Command failed: lpstat -lp"), {
+  const error = Object.assign(new Error(`
+    Command failed: lpstat -lp
+    lpstat: No destinations added.
+  `), {
     code: 1,
-    stderr: "lpstat: No destinations added.",
   });
 
   execAsync.mockImplementation(() => Promise.reject(error));
